@@ -7,20 +7,19 @@ class Test extends Component {
     };
 
     componentDidMount = async () => {
-        // const response = await axios.get('/api/test');
-        // console.log("response: ", response);
-        //
-        //
-        // const user = await axios.get("/api/user");
-        // console.log("User response: ", user);
+        const response = await axios.get('/api/test');
+        console.log("response: ", response);
+
+
+        const user = await axios.get("/api/user");
+        console.log("User response: ", user);
 
         const message = {
             text: "this is a message",
             name: "kim Possible"
-        }
-
-        const response = await axios.post("/api/send-message", message);
-        console.log("send message response :", response);
+        };
+        const postresponse = await axios.post("/api/send-message", message);
+        console.log("post response :", postresponse);
 
     };
 
