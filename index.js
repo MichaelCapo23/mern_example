@@ -1,16 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const PORT = process.env.PORT || 9000;
+const { resolve  } = require('path');
+
 
 const app = express();
 app.use(cors()); // set the request header to * so itll talk to any server that tries to communicate with it (your other server)
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-
-
-app.get('/', (request, response) => {
-    response.send('<h1>The server is working!</h1>');
-});
+app.use(express.static(resolve(__dirname, 'client', 'dist')));
 
 app.get('/api/test', (request, response) => {
    const data = {
@@ -36,6 +34,10 @@ app.post("/api/send-message", (request, response) => {
        success: true,
        data: request.body,
    });
+});
+
+app.get('*', (request, resposne) => {
+    response.sendFile(resolve(__dirname, 'client', 'dist', 'index.html'));
 });
 
 
